@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
     }
 
-    private final String gerantRole = ERole.ROLE_GERANT.name();
-    private final String userRole = ERole.ROLE_USER.name();
+    private final String proprietaireRole = ERole.ROLE_PROPRIETAIRE.name();
+    private final String locataireRole = ERole.ROLE_LOCATAIRE.name();
     private final String adminRole = ERole.ROLE_ADMIN.name();
 
     @Autowired
@@ -92,10 +92,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .antMatchers("/**/api-docs/**").permitAll()
                 .antMatchers("/agence/**").permitAll()
                 .antMatchers("/employe/**")
-                .hasAnyAuthority(gerantRole, adminRole)
+                .hasAnyAuthority(proprietaireRole, adminRole)
                 .antMatchers("/client/**")
                 .permitAll().antMatchers("/compte/**")
-                .hasAnyAuthority(userRole, adminRole)
+                .hasAnyAuthority(proprietaireRole, adminRole)
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/article/**").permitAll()
                 .antMatchers("/avis/**").permitAll()

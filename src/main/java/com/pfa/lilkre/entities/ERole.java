@@ -1,7 +1,7 @@
 package com.pfa.lilkre.entities;
 
 public enum ERole {
-    ROLE_USER,
-    ROLE_GERANT,
+    ROLE_LOCATAIRE,
+    ROLE_PROPRIETAIRE,
     ROLE_ADMIN
 }

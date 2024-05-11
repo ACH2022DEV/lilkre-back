@@ -135,35 +135,10 @@ public class AuthController {
                 .password(encoder.encode(signUpRequest.getPassword()))
                 .build();
 
-       /* String strRole = signUpRequest.getRole();
-        RoleEntity role;
-        if (strRole == null) {
-            RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            role = userRole;
-        } else {
-            switch (strRole) {
-                case "admin":
-                    RoleEntity adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                    role = adminRole;
 
-                    break;
-                case "gerant":
-                    RoleEntity gerantRole = roleRepository.findByName(ERole.ROLE_GERANT)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                    role = gerantRole;
-
-                    break;
-                default:
-                    RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                    role = userRole;
-            }
-        }*/
-        RoleEntity userRole = roleRepository.findByName(ERole.ROLE_USER)
+        RoleEntity LOCATAIRERole = roleRepository.findByName(ERole.ROLE_LOCATAIRE)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        user.setRole(userRole);
+        user.setRole(LOCATAIRERole);
         //mettre la vérification ici  (si le client
 
         Optional<ConfirmationCodeEntity> codeByEmail = iConfirmationCodeService.getCodeByEmail(signUpRequest.getEmail());

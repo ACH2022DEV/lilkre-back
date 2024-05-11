@@ -123,7 +123,7 @@ public class TokenStore {
         jsonResponse.put("accessToken", token);
         jsonResponse.put("tokenType", "Bearer");
         System.out.println("token" + token);
-        List<String> roles = Arrays.asList("ROLE_USER");
+        List<String> roles = Arrays.asList("ROLE_PROPRIETAIRE");
         return ResponseEntity.ok(
                 new JwtResponse(token, Id, username, email, roles));
     }
@@ -160,7 +160,7 @@ public class TokenStore {
                 suffix++;
             }
             uniqueUsername = username + suffix;
-            System.out.println("Nom d'utilisateur existant. Nom d'utilisateur unique généré: " + uniqueUsername);
+            System.out.println("Nom d'LOCATAIRE existant. Nom d'utilisateur unique généré: " + uniqueUsername);
         }
         user.setUsername(uniqueUsername);
         user.setNom(username);
@@ -176,9 +176,9 @@ public class TokenStore {
         imageUrls.add(images);
         user.setImages(imageUrls);
         RoleEntity role = new RoleEntity();
-        role.setName(ERole.ROLE_USER);
+        role.setName(ERole.ROLE_LOCATAIRE);
         //System.out.println("ROLE_USER "+  RoleRepository.findByName(ERole.ROLE_USER));
-        RoleEntity roleUser = RoleRepository.findByName(ERole.ROLE_USER).get();
+        RoleEntity roleUser = RoleRepository.findByName(ERole.ROLE_LOCATAIRE).get();
         user.setRole(roleUser);
         user.setPassword(passwordEncoder.encode(password));
         return personneService.save(user);
