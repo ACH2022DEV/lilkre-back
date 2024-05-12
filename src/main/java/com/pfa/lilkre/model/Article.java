@@ -1,5 +1,6 @@
 package com.pfa.lilkre.model;
 
+import com.pfa.lilkre.entities.CategorieEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -41,6 +42,7 @@ public class Article {
     private List<Image> images;
     @Schema(name = "avis", description = "la liste des avis de cette articles ")
     private List<Avis> avis;
+    private Categorie categorie;
     //la nouvelle modification
     /*private List<DevisArticle> devis;
     private List<ArticleFacture> facture;

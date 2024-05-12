@@ -77,13 +77,10 @@ public class ArticleServiceImpl implements IArticleService {
 
 
     public Article save(Article article) {
-
-
         return ArticleMapper.INSTANCE.mapToModel(repository.save(ArticleMapper.INSTANCE.mapToEntity(article)));
     }
 
     public Article update(Article article) {
-
         return ArticleMapper.INSTANCE.mapToModel(repository.save(ArticleMapper.INSTANCE.mapToEntity(article)));
     }
 

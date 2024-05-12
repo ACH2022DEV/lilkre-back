@@ -59,7 +59,9 @@ public class ArticleEntity implements Serializable {
     @JsonManagedReference
     private List<AvisEntity> avis;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categorie_id", nullable = false)
+    private CategorieEntity categorie;
 	/*@OneToMany(mappedBy = "article")
 	private List<DevisArticleEntity> devis;
 	@OneToMany(mappedBy = "article")
