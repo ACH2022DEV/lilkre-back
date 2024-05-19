@@ -12,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 @Mapper(uses = ArticleMapper.class)
+//CategorieMapper
 public interface CategorieMapper {
     CategorieMapper INSTANCE = Mappers.getMapper(CategorieMapper.class);
     ArticleMapper articleMapper = ArticleMapper.INSTANCE;
