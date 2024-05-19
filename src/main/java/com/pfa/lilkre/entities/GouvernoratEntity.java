@@ -1,5 +1,6 @@
 package com.pfa.lilkre.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "communes")
 public class GouvernoratEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +21,6 @@ public class GouvernoratEntity implements Serializable {
     @Column(nullable = false)
     private String nom;
     @OneToMany(mappedBy = "gouvernorat", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<CommuneEntity> communes;
 }

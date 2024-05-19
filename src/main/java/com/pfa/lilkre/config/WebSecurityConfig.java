@@ -106,7 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .antMatchers("/social/login/oauth2/code/**").permitAll()
                 .antMatchers("/token/**").permitAll()
                 //juste pour le moment
-                .antMatchers("/panier/**").permitAll()
+                .antMatchers("/Commune/**").permitAll()
+                .antMatchers("/Categorie/**").permitAll()
                 .antMatchers("/Envies/**").permitAll()
                 // fin : juste pour le moment =>annuler les accées aux urls
                 .antMatchers("/social/**")

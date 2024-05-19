@@ -1,5 +1,6 @@
 package com.pfa.lilkre.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -61,6 +62,7 @@ public class ArticleEntity implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categorie_id", nullable = false)
+    @JsonBackReference
     private CategorieEntity categorie;
 	/*@OneToMany(mappedBy = "article")
 	private List<DevisArticleEntity> devis;

@@ -20,8 +20,8 @@ public class CategorieController {
     ICategorieService iCategorieService;
 
     @GetMapping
-    public ResponseEntity<Page<CategorieEntity>> list(@ParameterObject Pageable pageable) {
-        Page<CategorieEntity> categoriePage = iCategorieService.getAll(pageable);
+    public ResponseEntity<Page<Categorie>> list(@ParameterObject Pageable pageable) {
+        Page<Categorie> categoriePage = iCategorieService.getAll(pageable);
         if (categoriePage.hasContent()) {
             return ResponseEntity.ok(categoriePage);
         } else {
@@ -31,7 +31,7 @@ public class CategorieController {
 
 
     @GetMapping("/{id}")
-    public Optional<CategorieEntity> getCategorie(@PathVariable Long id) {
+    public Optional<Categorie> getCategorie(@PathVariable Long id) {
         return iCategorieService.findById(id);
     }
 
@@ -41,8 +41,12 @@ public class CategorieController {
         iCategorieService.delete(id);
     }
 
-    @PostMapping
-    public void save(@RequestBody CategorieEntity categorie) {
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public void save(@RequestBody Categorie categorie) {
         iCategorieService.save(categorie);
+    }
+    @PutMapping
+    public void update(@RequestBody Categorie categorie) {
+        iCategorieService.update(categorie);
     }
 }

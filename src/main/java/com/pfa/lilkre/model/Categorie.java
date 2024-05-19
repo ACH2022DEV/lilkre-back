@@ -1,5 +1,7 @@
 package com.pfa.lilkre.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString()
 public class Categorie {
     private Long id;
     private String nom;

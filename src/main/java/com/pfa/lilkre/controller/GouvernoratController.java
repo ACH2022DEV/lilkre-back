@@ -36,12 +36,24 @@ public class GouvernoratController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void delete(@PathVariable Long id) {
-        iGouvernoratService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        Optional<GouvernoratEntity> gouvernorat=iGouvernoratService.findById(id);
+        if(gouvernorat.get().getCommunes().size() > 0){
+            System.out.println("you can't remove this!");
+            return ResponseEntity.ok().body("{\"message\": \"No\"}");
+        }else {
+            iGouvernoratService.delete(id);
+            return ResponseEntity.ok().body("{\"message\": \"Yes\"}");
+        }
+
     }
 
     @PostMapping
     public void save(@RequestBody GouvernoratEntity gouvernoratEntity) {
         iGouvernoratService.save(gouvernoratEntity);
+    }
+    @PutMapping
+    public void update(@RequestBody GouvernoratEntity gouvernoratEntity) {
+        iGouvernoratService.update(gouvernoratEntity);
     }
 }

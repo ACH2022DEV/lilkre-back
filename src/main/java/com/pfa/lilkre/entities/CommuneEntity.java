@@ -1,5 +1,6 @@
 package com.pfa.lilkre.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString()
 public class CommuneEntity  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +24,7 @@ public class CommuneEntity  implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gouvernorat_id")
+    @JsonBackReference
     private GouvernoratEntity gouvernorat;
 
 }

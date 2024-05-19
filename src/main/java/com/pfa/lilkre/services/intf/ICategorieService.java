@@ -9,13 +9,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface ICategorieService {
-    public Page<CategorieEntity> getAll(Pageable pageable);
+    public Page<Categorie> getAll(Pageable pageable);
 
-    public Optional<CategorieEntity> findById(Long id);
+    public Optional<Categorie> findById(Long id);
 
-    public CategorieEntity save(CategorieEntity categorie);
+    public Categorie save(Categorie categorie);
 
-    public CategorieEntity update(CategorieEntity categorie);
+    public Categorie update(Categorie categorie);
 
     public boolean delete(Long id);
 }

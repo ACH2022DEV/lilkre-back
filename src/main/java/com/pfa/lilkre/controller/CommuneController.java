@@ -1,6 +1,8 @@
 package com.pfa.lilkre.controller;
 
 import com.pfa.lilkre.entities.CommuneEntity;
+import com.pfa.lilkre.entities.GouvernoratEntity;
+import com.pfa.lilkre.entities.dto.CommuneWithGouvernoratDTO;
 import com.pfa.lilkre.services.intf.ICommuneService;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,22 @@ public class CommuneController {
 
 
     @GetMapping("/{id}")
-    public Optional<CommuneEntity> getCommuneEntity(@PathVariable Long id) {
-        return iCommuneService.findById(id);
+    public ResponseEntity<CommuneWithGouvernoratDTO> getCommuneEntity(@PathVariable Long id) {
+        Optional<CommuneEntity> communeOptional = iCommuneService.findById(id);
+        if (communeOptional.isPresent()) {
+            CommuneEntity commune = communeOptional.get();
+            GouvernoratEntity gouvernorat = commune.getGouvernorat();
+            CommuneWithGouvernoratDTO communeDTO = new CommuneWithGouvernoratDTO();
+            communeDTO.setCommuneId(commune.getId());
+            communeDTO.setCommuneNom(commune.getNom());
+            if(gouvernorat!=null){
+                communeDTO.setGouvernoratId(gouvernorat.getId());
+                communeDTO.setGouvernoratNom(gouvernorat.getNom());
+            }
+            return ResponseEntity.ok(communeDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -45,5 +61,9 @@ public class CommuneController {
     @PostMapping
     public void save(@RequestBody CommuneEntity communeEntity) {
         iCommuneService.save(communeEntity);
+    }
+    @PutMapping
+    public void update(@RequestBody CommuneEntity communeEntity) {
+        iCommuneService.update(communeEntity);
     }
 }

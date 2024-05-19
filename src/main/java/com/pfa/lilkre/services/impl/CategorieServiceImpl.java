@@ -2,6 +2,9 @@ package com.pfa.lilkre.services.impl;
 
 import com.pfa.lilkre.entities.ArticleEntity;
 import com.pfa.lilkre.entities.CategorieEntity;
+import com.pfa.lilkre.mappers.ArticleMapper;
+import com.pfa.lilkre.mappers.CategorieMapper;
+import com.pfa.lilkre.model.Categorie;
 import com.pfa.lilkre.repository.CategorieRepository;
 import com.pfa.lilkre.services.intf.ICategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,28 +29,29 @@ public class CategorieServiceImpl implements ICategorieService {
 
 
     @Override
-    public Page<CategorieEntity> getAll(Pageable pageable) {
+    public Page<Categorie> getAll(Pageable pageable) {
 
         Page<CategorieEntity> categorieEntityPage = repository.findAll(pageable);
         List<CategorieEntity> categorieEntityList = categorieEntityPage.stream().toList();
-        List<CategorieEntity> CategorieListList =
-                categorieEntityList.stream().toList();
-
+        List<Categorie> CategorieListList =
+        CategorieMapper.INSTANCE.mapToModels(categorieEntityList.stream().toList());
 
         return new PageImpl<>(CategorieListList, pageable, categorieEntityPage.getTotalElements());
     }
 
-    public Optional<CategorieEntity> findById(Long id) {
-        return repository.findById(id);
+    public Optional<Categorie> findById(Long id) {
+
+       return repository.findById(id).map(CategorieMapper.INSTANCE::mapToModel);
     }
 
 
-    public CategorieEntity save(CategorieEntity categorie) {
-        return repository.save(categorie);
+    public Categorie save(Categorie categorie) {
+        return CategorieMapper.INSTANCE.mapToModel(repository.save(CategorieMapper.INSTANCE.mapToEntity(categorie)));
     }
 
-    public CategorieEntity update(CategorieEntity categorie) {
-        return repository.save(categorie);
+    public Categorie update(Categorie categorie) {
+
+        return CategorieMapper.INSTANCE.mapToModel(repository.save(CategorieMapper.INSTANCE.mapToEntity(categorie)));
     }
 
 
